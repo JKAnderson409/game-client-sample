@@ -5,7 +5,10 @@ import {
   Auth0UserProfile,
   WebAuth
 } from 'auth0-js';
+import { Dispatch } from 'react';
+
 import auth0Config from '../../_KEYS';
+import { IPawnData, IPawnDataUpdate } from './game/Pawn';
 import Store from './Store';
 
 class Auth {
@@ -42,7 +45,6 @@ class Auth {
           console.error( err );
           return;
         }
-
         this.setSession( authResult );
       }
     );
@@ -65,6 +67,10 @@ class Auth {
     this.auth0.client.userInfo(
       authResult.accessToken,
       ( err: Auth0Error, user: Auth0UserProfile ) => {
+        if ( err ) {
+          console.error( err );
+        }
+
         this.store.updateUserData( {
           name: user.nickname
         } );
@@ -72,18 +78,14 @@ class Auth {
     );
   }
 
-  renewSession = ( cb: React.Dispatch<boolean> ): void => {
-    this.auth0.checkSession(
+  renewSession = async (): Promise<void> => {
+    await this.auth0.checkSession(
       {},
-      ( err: Auth0Error, authResult: Auth0DecodedHash ) => {
+      async ( err: Auth0Error, authResult: Auth0DecodedHash ) => {
         if ( err ) {
-          console.error( err );
-          this.logout();
           return;
         }
-
-        this.setSession( authResult );
-        cb( true );
+        await this.setSession( authResult );
       }
     );
   }
@@ -92,7 +94,6 @@ class Auth {
     if ( !this.expiresAt ) {
       return false;
     }
-
     return ( new Date().getTime() < this.expiresAt );
   }
 }

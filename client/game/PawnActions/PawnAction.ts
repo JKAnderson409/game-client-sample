@@ -1,7 +1,7 @@
 import Store from '../../Store';
 import { Coords } from '../GameMap';
 import Pathfinder from '../Pathfinder';
-import Pawn from '../Pawn';
+import Pawn, { IPawnData } from '../Pawn';
 
 interface IPawnActionProps {
   store: Store;
@@ -49,14 +49,16 @@ abstract class PawnAction {
       return false;
     }
 
-    return this.store.pawnList().every(
-      ( pawn: Pawn ) => {
-        return !(
-          ( location[ 0 ] === pawn.data.location[ 0 ] ) &&
-          ( location[ 1 ] === pawn.data.location[ 1 ] )
-        );
-      }
-    );
+    return true;
+
+    // return this.store.worldMobData().every(
+    //   ( pawnData: IPawnData ) => {
+    //     return !(
+    //       ( location[ 0 ] === pawnData.location[ 0 ] ) &&
+    //       ( location[ 1 ] === pawnData.location[ 1 ] )
+    //     );
+    //   }
+    // );
   }
 }
 

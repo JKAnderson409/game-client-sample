@@ -17,7 +17,7 @@ class Game extends Application {
   setupHasRun: boolean = false;
   cameraSpeed: { x: number, y: number } = { x: 0, y: 0 };
 
-  private windowResizeTimer: any;
+  private windowResizeTimer: NodeJS.Timeout;
 
   constructor ( store: Store ) {
     super();
@@ -54,21 +54,6 @@ class Game extends Application {
     const healthBar: Texture = master.textures[ 'uf_interface_159.png' ];
 
     this.store.gameMap = new GameMap( this.store, garden.texture );
-
-    const pawnList: Pawn[] = this.store.worldPawnData().map(
-      ( data: IPawnData ) => {
-        return new Pawn( {
-          store: this.store,
-          controller: null,
-          animation: animList[ data.type ],
-          textures: [ healthBar ],
-          fx: { attack: animList[ 'uf_FX_impact-1' ] },
-          data
-        } );
-      }
-    );
-
-    this.store.pawnList( pawnList );
 
     this.store.userController = new UserController( this.store );
 

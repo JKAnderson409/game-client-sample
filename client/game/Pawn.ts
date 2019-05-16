@@ -1,7 +1,6 @@
 import { AnimatedSprite, Sprite, Text, Texture } from 'pixi.js';
 
-import Store, { Stream } from '../Store';
-import Game from './Game';
+import Store from '../Store';
 import { Coords } from './GameMap';
 import UserController from './UserController';
 
@@ -27,6 +26,17 @@ interface IPawnData {
   maxHP: number;
   speed: number;
   location: Coords;
+}
+
+interface IPawnDataUpdate {
+  name?: string;
+  type?: string;
+  ap?: number;
+  maxAP?: number;
+  hp?: number;
+  maxHP?: number;
+  speed?: number;
+  location?: Coords;
 }
 
 class Pawn {
@@ -211,4 +221,4 @@ class Pawn {
 }
 
 export default Pawn;
-export { IFX, IPawnData };
+export { IFX, IPawnData, IPawnDataUpdate };

@@ -1,13 +1,12 @@
 import React, { MutableRefObject } from 'react';
 
-import Auth from '../Auth';
-import Store, { Stream } from '../Store';
+import Store from '../Store';
 
 interface IProps {
   store: Store;
 }
-// tslint:disable-next-line: typedef
-function GameView ( { store }: IProps ) {
+
+function GameView ( { store }: IProps ): JSX.Element {
   const canvasAnchor: MutableRefObject<HTMLDivElement> = React.useRef(
     document.createElement( 'div' )
   );

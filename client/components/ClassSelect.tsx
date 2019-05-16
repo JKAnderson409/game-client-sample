@@ -1,12 +1,12 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, useEffect, useState } from 'react';
 
+import { IPawnData } from '../game/Pawn';
 import Store from '../Store';
 import ClassOption from './ClassOption';
 
 interface IProps {
   store: Store;
-  selectedClass: null | string;
-  setSelectedClass: Dispatch<SetStateAction<null | string>>;
+  userData: IPawnData;
 }
 
 const playableClassList: string[] = [
@@ -16,8 +16,8 @@ const playableClassList: string[] = [
   'priest',
   'wizard'
 ];
-// tslint:disable-next-line: typedef
-function CharacterCreator ( { store, selectedClass, setSelectedClass }: IProps ) {
+
+function ClassSelect ( { store, userData }: IProps ): JSX.Element {
   return (
     <div>
       <p>Select a class.</p>
@@ -26,9 +26,9 @@ function CharacterCreator ( { store, selectedClass, setSelectedClass }: IProps )
           playableClassList.map( ( classType: string ) => {
             return <ClassOption
               key={ classType }
+              store={ store }
               playerClassType={ classType }
-              selectedClass={ selectedClass }
-              setSelectedClass={ setSelectedClass }
+              isSelected={ userData.type === classType }
             />;
           } )
         }
@@ -37,4 +37,4 @@ function CharacterCreator ( { store, selectedClass, setSelectedClass }: IProps )
   );
 }
 
-export default CharacterCreator;
+export default ClassSelect;

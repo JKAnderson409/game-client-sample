@@ -1,6 +1,7 @@
 import Store from '../Store';
 import { Coords } from './GameMap';
 import Input from './Input';
+import Step from './PawnActions/Step';
 
 class UserController {
   store: Store;
@@ -12,7 +13,7 @@ class UserController {
     this.store = store;
   }
 
-  step ( direction: 'UP' | 'DOWN' | 'LEFT' | 'RIGHT' | null ) {
+  step ( direction: 'UP' | 'DOWN' | 'LEFT' | 'RIGHT' | null ): void {
     const location: Coords = this.store.userData().location;
     const target: Coords = [ location[ 0 ], location[ 1 ] ];
 
@@ -44,11 +45,13 @@ class UserController {
 
     this.prevTarget = target;
 
-    this.store.enqueueAction( {
-      type: 'step',
-      pawnName: this.store.userData().name,
+    const stepAction: Step = new Step( {
+      store: this.store,
+      pawn: this.store.userPawn,
       target
     } );
+
+    stepAction.activate();
   }
 }
 

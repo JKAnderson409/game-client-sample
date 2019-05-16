@@ -1,0 +1,54 @@
+.class-select {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+
+  margin: 10px 0;
+}
+
+.class-option {
+  height: 100px;
+  width: 90px;
+
+  margin: 0 10px;
+
+  position: relative;
+
+  background-size: 100%;
+  background-clip: border-box;
+  background-repeat: no-repeat;
+}
+
+.class-option > p {
+  width: inherit;
+
+  position: absolute;
+  bottom: 0;
+
+  font-size: 8pt;
+}
+
+.selected {
+  outline: 2px solid var( --dungeon-gold );
+}
+
+.archer {
+  background-image: url( '../archer_1.png' );
+}
+
+.priest {
+  background-image: url( '../priest_1.png' );
+}
+
+.thief {
+  background-image: url( '../thief_1.png' );
+}
+
+.warrior_f {
+  background-image: url( '../warrior_f_1.png' );
+}
+
+.wizard {
+  background-image: url( '../wizard_1.png' );
+}

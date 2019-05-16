@@ -26,8 +26,8 @@ class Input {
 
     const { stage } = this.store.game;
 
-    stage.x = 0 - globalPlayerX + ( window.innerWidth / 2 );
-    stage.y = 0 - globalPlayerY + ( window.innerHeight / 2 );
+    stage.x = 0 - globalPlayerX + ( window.innerWidth / 2 ) - 32;
+    stage.y = 0 - globalPlayerY + ( window.innerHeight / 2 ) - 60;
   }
 
   private cameraMove = ( key: string ): void => {
